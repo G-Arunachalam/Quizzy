@@ -1,11 +1,11 @@
 package com.cyberbyte.Quiz.Controller;
 
-import com.cyberbyte.Quiz.Question;
+import com.cyberbyte.Quiz.Model.Question;
 import com.cyberbyte.Quiz.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.List;
 
@@ -27,15 +27,13 @@ public class QuestionController {
     }
 
     @PostMapping("add")
-    public String addQuestion(@RequestBody Question q){
-        questionService.addQuestion(q);
-        return "Success";
+    public ResponseEntity<String> addQuestion(@RequestBody Question q){
+        return questionService.addQuestion(q);
     }
 
     @DeleteMapping("remove/{n}")
-    public String deleteQuestion(@PathVariable int n){
-        questionService.deleteQuestion(n);
-        return "Deleted!";
+    public ResponseEntity<String> deleteQuestion(@PathVariable int n){
+        return questionService.deleteQuestion(n);
     }
 
 }

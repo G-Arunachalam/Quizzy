@@ -1,14 +1,12 @@
 package com.cyberbyte.Quiz.Service;
 
 import com.cyberbyte.Quiz.Dao.QuestionDao;
-import com.cyberbyte.Quiz.Question;
+import com.cyberbyte.Quiz.Model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.function.EntityResponse;
 
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +38,26 @@ public class QuestionService
         return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
     }
 
-    public String addQuestion(Question q) {
-        questionDao.save(q);
-        return "Sucess";
+    public ResponseEntity<String> addQuestion(Question q) {
+        try{
+            questionDao.save(q);
+            return new ResponseEntity<>("Success", HttpStatus.OK);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Failure", HttpStatus.BAD_REQUEST);
     }
 
-    public void deleteQuestion(int n) {
-        questionDao.deleteById(n);
+    public ResponseEntity<String> deleteQuestion(int n) {
+        try{
+            questionDao.deleteById(n);
+            return new ResponseEntity<>("Success", HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Failure", HttpStatus.BAD_REQUEST);
     }
 }
 

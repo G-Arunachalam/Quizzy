@@ -1,4 +1,4 @@
-package com.cyberbyte.Quiz;
+package com.cyberbyte.Quiz.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
